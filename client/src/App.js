@@ -6,7 +6,7 @@ import Products from "./components/pages/Products";
 import Product from "./components/pages/Product";
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
-import "./App.css";
+import "./App.scss";
 
 function App() {
   return (
