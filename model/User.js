@@ -67,6 +67,11 @@ const userSchema = new mongoose.Schema({
     enum: ["PIONEER", "CESUNER"],
     default: "CESUNER",
   },
+  role: {
+    type: String,
+    enum: ["USER", "ADMIN"],
+    default: ["USER"],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
