@@ -64,8 +64,8 @@ const userSchema = new mongoose.Schema({
   },
   level: {
     type: String,
-    enum: ["Pioneer", "Cesuner"],
-    default: "Cesuner",
+    enum: ["PIONEER", "CESUNER"],
+    default: "CESUNER",
   },
   createdAt: {
     type: Date,
