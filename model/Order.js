@@ -21,24 +21,23 @@ const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
-    required: [true, "Please provide a user id"],
+    required: [true, "Please provide a user id."],
   },
   productId: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
-    required: [true, "Please provide a product id"],
+    required: [true, "Please provide a product id."],
   },
   sku: {
     type: String,
-  },
-  orderId: {
-    type: String,
+    required: [true, "Please provide a sku."],
   },
   associatedOrderId: {
     type: String,
   },
   price: {
     type: Number,
+    required: [true, "please provide a price."],
   },
   currency: {
     type: String,
