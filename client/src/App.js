@@ -6,19 +6,19 @@ import Products from "./components/pages/Products";
 import Product from "./components/pages/Product";
 import About from "./components/pages/About";
 import Contact from "./components/pages/Contact";
+import Navbar from "./components/layout/Navbar";
 import "./App.scss";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Switch>
-        <div className="App">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/products" component={Products} />
-          <Route exact path="/product/:slug" component={Product} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/contact" component={Contact} />
-        </div>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/product/:slug" component={Product} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/contact" component={Contact} />
       </Switch>
     </BrowserRouter>
   );

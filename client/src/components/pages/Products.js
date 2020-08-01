@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-const Products = () => {
+import { getProducts } from "../../actions/product";
+
+const Products = ({ products, getProducts }) => {
+  useEffect(() => {
+    getProducts();
+  }, []);
+
   return (
     <div>
       <h1>Products</h1>
+      <p>{JSON.stringify(products)}</p>
     </div>
   );
 };
 
-export default Products;
+const mapStateToProps = ({ products }) => ({ products });
+
+export default connect(mapStateToProps, { getProducts })(Products);
