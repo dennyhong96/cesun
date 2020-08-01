@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -77,5 +78,17 @@ const userSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
+
+// Hash password upon creating a user, or resetting password
+userSchema.pre("save", async function (next) {
+  if (!this.isNew && !this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+// Compare given plain password with user's password
+userSchema.methods.correctPassword = async (plainPassword) => {
+  return await bcrypt.compare(plainPassword, this.password);
+};
 
 module.exports = mongoose.model("User", userSchema);
