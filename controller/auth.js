@@ -1,10 +1,10 @@
-const AppError = require("../utils/AppError");
-const bodyFilter = require("../utils/bodyFilter");
-const asyncHandler = require("../utils/asyncHandler");
 const User = require("../model/User");
+const AppError = require("../utils/AppError");
+const asyncHandler = require("../utils/asyncHandler");
+const bodyFilter = require("../utils/bodyFilter");
 
-// @desc    Login
-// @route   GET /api/v1/products
+// @desc    Register
+// @route   POST /api/v1/register
 // @access  Public
 exports.register = asyncHandler(async (req, res, next) => {
   const filteredBody = bodyFilter(
@@ -25,7 +25,7 @@ exports.register = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    Login
-// @route   GET /api/v1/products
+// @route   POST /api/v1/auth/login
 // @access  Public
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -50,4 +50,11 @@ exports.login = asyncHandler(async (req, res, next) => {
     status: "success",
     data: { token: user.genJwtToken() },
   });
+});
+
+// @desc    Load User
+// @route   GET /api/v1/auth
+// @access  Private
+exports.loadUser = asyncHandler(async (req, res, next) => {
+  console.log(req.user);
 });

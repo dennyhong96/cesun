@@ -92,6 +92,7 @@ userSchema.methods.correctPassword = async function (plainPassword) {
   return await bcrypt.compare(plainPassword, this.password);
 };
 
+// Generate a jwt token with user id as payload
 userSchema.methods.genJwtToken = function () {
   console.log(this.id);
   const payload = { id: this.id };
