@@ -12,6 +12,9 @@ const Navbar = () => {
       <NavLink exact to="/products">
         Products
       </NavLink>
+      <NavLink exact to="/profile">
+        Profile
+      </NavLink>
       <NavLink exact to="/product/123">
         Product
       </NavLink>
