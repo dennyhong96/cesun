@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-const Products = () => {
+import { getProducts } from "../../actions/product";
+
+const Products = ({ products, getProducts, history }) => {
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
+
+  const handleClick = (slug) => {
+    history.push(`/product/${slug}`);
+  };
+
   return (
     <div>
       <h1>Products</h1>
+      {products.map((product) => (
+        <div key={product.id}>
+          {product.slug}
+          <button onClick={() => handleClick(product.slug)}> go</button>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default Products;
+const mapStateToProps = ({ products: { products } }) => ({ products });
+
+export default connect(mapStateToProps, { getProducts })(Products);
