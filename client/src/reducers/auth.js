@@ -24,7 +24,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isAuthenticated: true, ...payload };
     case AUTH_ERROR:
       localStorage.removeItem("jwt");
-      return { INITIAL_STATE };
+      return INITIAL_STATE;
     default:
       return state;
   }

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 
+import { login, register } from "../../actions/auth";
 import "./Profile.scss";
 
-const Profile = () => {
+const Profile = ({ login, register }) => {
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -28,10 +30,12 @@ const Profile = () => {
 
   const handleRegister = (evt) => {
     evt.preventDefault();
+    register(formData);
   };
 
   const handleLogin = (evt) => {
     evt.preventDefault();
+    login(formData);
   };
 
   return (
@@ -106,4 +110,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default connect(null, { login, register })(Profile);
