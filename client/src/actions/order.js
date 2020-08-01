@@ -14,3 +14,16 @@ export const getOrders = () => async (dispatch) => {
     console.error(error);
   }
 };
+
+export const getOrder = (orderId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/v1/orders/${orderId}`);
+    console.log(res.data);
+    dispatch({
+      type: ORDER_FETCHED,
+      payload: res.data.data.order,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

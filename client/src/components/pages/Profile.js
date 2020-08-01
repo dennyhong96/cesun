@@ -2,10 +2,10 @@ import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { login, register } from "../../actions/auth";
-import { getOrders } from "../../actions/order";
+import { getOrders, getOrder } from "../../actions/order";
 import "./Profile.scss";
 
-const Profile = ({ auth, login, register, getOrders, order }) => {
+const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
   useEffect(() => {
     getOrders();
   }, [auth.isAuthenticated]);
@@ -133,6 +133,9 @@ const Profile = ({ auth, login, register, getOrders, order }) => {
 
 const mapStateToProps = ({ auth, order }) => ({ auth, order });
 
-export default connect(mapStateToProps, { login, register, getOrders })(
-  Profile
-);
+export default connect(mapStateToProps, {
+  login,
+  register,
+  getOrders,
+  getOrder,
+})(Profile);
