@@ -94,7 +94,6 @@ userSchema.methods.correctPassword = async function (plainPassword) {
 
 // Generate a jwt token with user id as payload
 userSchema.methods.genJwtToken = function () {
-  console.log(this.id);
   const payload = { id: this.id };
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
