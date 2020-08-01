@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
 
+import { loadUser } from "./actions/auth";
 import Home from "./components/pages/Home";
 import Products from "./components/pages/Products";
 import Profile from "./components/pages/Profile";
@@ -10,7 +12,11 @@ import Contact from "./components/pages/Contact";
 import Navbar from "./components/layout/Navbar";
 import "./App.scss";
 
-function App() {
+const App = ({ loadUser }) => {
+  useEffect(() => {
+    loadUser();
+  }, []);
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -24,6 +30,6 @@ function App() {
       </Switch>
     </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default connect(null, { loadUser })(App);

@@ -23,7 +23,8 @@ export default (state = INITIAL_STATE, action) => {
     case USER_LOADED:
       return { ...state, isAuthenticated: true, ...payload };
     case AUTH_ERROR:
-      return INITIAL_STATE;
+      localStorage.removeItem("jwt");
+      return { INITIAL_STATE };
     default:
       return state;
   }
