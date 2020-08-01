@@ -1,6 +1,5 @@
 const User = require("../model/User");
 const asyncHandler = require("../utils/asyncHandler");
-const AppError = require("../utils/AppError");
 const bodyFilter = require("../utils/bodyFilter");
 
 // @desc    Update an user
