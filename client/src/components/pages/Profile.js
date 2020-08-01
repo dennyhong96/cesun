@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { connect } from "react-redux";
 
 import { login, register } from "../../actions/auth";
@@ -112,6 +112,7 @@ const Profile = ({ auth, login, register }) => {
       ) : (
         <div>
           <h3>User Logged In</h3>
+          <p>{JSON.stringify(auth.user)}</p>
         </div>
       )}
     </Fragment>

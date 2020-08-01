@@ -3,19 +3,28 @@ import { connect } from "react-redux";
 
 import { getProducts } from "../../actions/product";
 
-const Products = ({ products, getProducts }) => {
+const Products = ({ products, getProducts, history }) => {
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [getProducts]);
+
+  const handleClick = (slug) => {
+    history.push(`/product/${slug}`);
+  };
 
   return (
     <div>
       <h1>Products</h1>
-      <p>{JSON.stringify(products)}</p>
+      {products.map((product) => (
+        <div key={product.id}>
+          {product.slug}
+          <button onClick={() => handleClick(product.slug)}> go</button>
+        </div>
+      ))}
     </div>
   );
 };
 
-const mapStateToProps = ({ products }) => ({ products });
+const mapStateToProps = ({ products: { products } }) => ({ products });
 
 export default connect(mapStateToProps, { getProducts })(Products);

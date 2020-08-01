@@ -15,7 +15,7 @@ import "./App.scss";
 const App = ({ loadUser }) => {
   useEffect(() => {
     loadUser();
-  }, []);
+  }, [loadUser]);
 
   return (
     <BrowserRouter>
