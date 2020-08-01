@@ -11,6 +11,11 @@ const feedbackSchema = new mongoose.Schema({
     trim: true,
     required: [true, "Feedback content cannot be empty."],
   },
+  orderId: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Order",
+    required: true,
+  },
   createdAt: {
     type: Date,
     default: Date.now,

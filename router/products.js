@@ -7,7 +7,7 @@ const {
   getProduct,
 } = require("../controller/products");
 
-router.use("/:itemId", orderRouter);
+router.use("/:productId/orders", orderRouter);
 
 router.route("/").get(getProducts).post(createProduct);
 router.route("/:slug").get(getProduct);

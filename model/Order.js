@@ -6,6 +6,10 @@ const orderSchema = new mongoose.Schema({
     ref: "User",
     required: [true, "Please provide a user id."],
   },
+  orderId: {
+    type: String,
+    required: [true, "Please provide an order id."],
+  },
   productId: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
@@ -27,13 +31,9 @@ const orderSchema = new mongoose.Schema({
     enum: ["USD", "EURO", "POUND"],
     default: "USD",
   },
-  feedbacks: {
-    type: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: "Feedback",
-      },
-    ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
