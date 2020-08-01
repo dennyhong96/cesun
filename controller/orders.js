@@ -6,6 +6,9 @@ const generateOrderId = require("../utils/generateOrderId");
 const AppError = require("../utils/AppError");
 const Product = require("../model/Product");
 
+// @desc    Create an order
+// @route   POST /api/v1/products/productId/orders
+// @access  Private
 exports.createOrder = asyncHandler(async (req, res, next) => {
   // Hanlde user level not hight enough
   const product = await Product.findById(req.params.productId);
@@ -44,5 +47,16 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
   res.status(201).json({
     status: "success",
     data: { order },
+  });
+});
+
+// @desc    Get all orders of logged in user
+// @route   Get /api/v1/orders
+// @access  Private
+exports.getOrders = asyncHandler(async (req, res, next) => {
+  const orders = await Order.find({ userId: req.user.id });
+  res.status(200).json({
+    status: "success",
+    data: { orders },
   });
 });
