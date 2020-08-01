@@ -88,11 +88,12 @@ userSchema.pre("save", async function (next) {
 });
 
 // Compare given plain password with user's password
-userSchema.methods.correctPassword = async (plainPassword) => {
+userSchema.methods.correctPassword = async function (plainPassword) {
   return await bcrypt.compare(plainPassword, this.password);
 };
 
-userSchema.methods.genJwtToken = () => {
+userSchema.methods.genJwtToken = function () {
+  console.log(this.id);
   const payload = { id: this.id };
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
