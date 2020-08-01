@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -71,7 +72,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ["USER", "ADMIN"],
-    default: ["USER"],
+    default: "USER",
   },
   createdAt: {
     type: Date,
@@ -89,6 +90,14 @@ userSchema.pre("save", async function (next) {
 // Compare given plain password with user's password
 userSchema.methods.correctPassword = async (plainPassword) => {
   return await bcrypt.compare(plainPassword, this.password);
+};
+
+userSchema.methods.genJwtToken = () => {
+  const payload = { id: this.id };
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES,
+  });
+  return token;
 };
 
 module.exports = mongoose.model("User", userSchema);

@@ -1,5 +1,6 @@
 const AppError = require("../utils/AppError");
 const bodyFilter = require("../utils/bodyFilter");
+const asyncHandler = require("../utils/asyncHandler");
 const User = require("../model/User");
 
 // @desc    Login
@@ -16,9 +17,9 @@ exports.register = asyncHandler(async (req, res, next) => {
     "confirmPassword"
   );
 
-  const user = await User.create({ filteredBody });
+  const user = await User.create(filteredBody);
   res.status(200).json({
     status: "success",
-    data: { user },
+    data: { token: user.genJwtToken() },
   });
 });
