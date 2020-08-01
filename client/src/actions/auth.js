@@ -7,6 +7,7 @@ import {
   USER_LOGGEDIN,
   USER_REGISTERED,
   AUTH_ERROR,
+  LOGOUT,
 } from "./actionTypes";
 
 const config = {
@@ -64,4 +65,10 @@ export const loadUser = () => async (dispatch) => {
       type: AUTH_ERROR,
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGOUT,
+  });
 };

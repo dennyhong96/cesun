@@ -3,6 +3,7 @@ import {
   USER_REGISTERED,
   USER_LOGGEDIN,
   AUTH_ERROR,
+  LOGOUT,
 } from "../actions/actionTypes";
 
 import setJwtHeader from "../utils/setJwtHeader";
@@ -22,6 +23,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isAuthenticated: true };
     case USER_LOADED:
       return { ...state, isAuthenticated: true, ...payload };
+    case LOGOUT:
     case AUTH_ERROR:
       localStorage.removeItem("jwt");
       return INITIAL_STATE;
