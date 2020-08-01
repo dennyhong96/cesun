@@ -57,4 +57,12 @@ exports.login = asyncHandler(async (req, res, next) => {
 // @access  Private
 exports.loadUser = asyncHandler(async (req, res, next) => {
   console.log(req.user);
+  const user = await User.findById(req.user.id).select(
+    "-amazonOrderId -password -confirmPassword -passwordResetToken -resetTokenExpires -__v"
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: { user },
+  });
 });
