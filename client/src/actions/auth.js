@@ -23,6 +23,7 @@ export const register = (formData) => async (dispatch) => {
       type: USER_REGISTERED,
       payload: res.data.data.token,
     });
+    dispatch(loadUser());
   } catch (error) {
     console.error(error);
     dispatch({
@@ -38,6 +39,7 @@ export const login = (formData) => async (dispatch) => {
       type: USER_LOGGEDIN,
       payload: res.data.data.token,
     });
+    dispatch(loadUser());
   } catch (error) {
     console.error(error);
     dispatch({
