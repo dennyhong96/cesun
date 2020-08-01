@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { getProduct } from "../../actions/product";
 
-const Product = ({ match, getProduct, products }) => {
+const Product = ({ match, getProduct, product }) => {
   useEffect(() => {
     const slug = match.params.slug;
     getProduct(slug);
@@ -12,11 +12,11 @@ const Product = ({ match, getProduct, products }) => {
   return (
     <div>
       <h1>Product</h1>
-      <p>{JSON.stringify(products.selectedProduct)}</p>
+      <p>{JSON.stringify(product.selectedProduct)}</p>
     </div>
   );
 };
 
-const mapStateToProps = ({ products }) => ({ products });
+const mapStateToProps = ({ product }) => ({ product });
 
 export default connect(mapStateToProps, { getProduct })(Product);
