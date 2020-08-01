@@ -1,22 +1,5 @@
 const mongoose = require("mongoose");
 
-const feedbackSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    trim: true,
-    required: [true, "Feedback title cannot be empty."],
-  },
-  content: {
-    type: String,
-    trim: true,
-    required: [true, "Feedback content cannot be empty."],
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
-
 const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.ObjectId,
@@ -44,7 +27,14 @@ const orderSchema = new mongoose.Schema({
     enum: ["USD", "EURO", "POUND"],
     default: "USD",
   },
-  feedbacks: [feedbackSchema],
+  feedbacks: {
+    type: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: "Feedback",
+      },
+    ],
+  },
 });
 
 module.exports = mongoose.model("Order", orderSchema);
