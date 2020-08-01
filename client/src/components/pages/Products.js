@@ -18,13 +18,15 @@ const Products = ({ products, getProducts, history }) => {
       {products.map((product) => (
         <div key={product.id}>
           {product.slug}
-          <button onClick={() => handleClick(product.slug)}> go</button>
+          <button onClick={() => handleClick(product.slug)}>
+            VIEW PRODUCT
+          </button>
         </div>
       ))}
     </div>
   );
 };
 
-const mapStateToProps = ({ products: { products } }) => ({ products });
+const mapStateToProps = ({ product: { products } }) => ({ products });
 
 export default connect(mapStateToProps, { getProducts })(Products);

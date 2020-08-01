@@ -1,10 +1,15 @@
-import React, { useState, Fragment } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 
 import { login, register } from "../../actions/auth";
+import { getOrders } from "../../actions/order";
 import "./Profile.scss";
 
-const Profile = ({ auth, login, register }) => {
+const Profile = ({ auth, login, register, getOrders, order }) => {
+  useEffect(() => {
+    getOrders();
+  }, [auth.isAuthenticated]);
+
   const [formData, setFormData] = useState({
     email: "",
     firstName: "",
@@ -113,12 +118,21 @@ const Profile = ({ auth, login, register }) => {
         <div>
           <h3>User Logged In</h3>
           <p>{JSON.stringify(auth.user)}</p>
+          <h3>User orders</h3>
+          {order.orders.map((order) => (
+            <div className="" key={order._id}>
+              <p>{JSON.stringify(order)}</p>
+              <button>VIEW ORDER</button>
+            </div>
+          ))}
         </div>
       )}
     </Fragment>
   );
 };
 
-const mapStateToProps = ({ auth }) => ({ auth });
+const mapStateToProps = ({ auth, order }) => ({ auth, order });
 
-export default connect(mapStateToProps, { login, register })(Profile);
+export default connect(mapStateToProps, { login, register, getOrders })(
+  Profile
+);
