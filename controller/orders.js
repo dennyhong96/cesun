@@ -1,7 +1,5 @@
 const Order = require("../model/Order");
-const Feedback = require("../model/Feedback");
 const asyncHandler = require("../utils/asyncHandler");
-const bodyFilter = require("../utils/bodyFilter");
 const generateOrderId = require("../utils/generateOrderId");
 const AppError = require("../utils/AppError");
 const Product = require("../model/Product");
@@ -58,5 +56,27 @@ exports.getOrders = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     status: "success",
     data: { orders },
+  });
+});
+
+// @desc    Get an order of an user
+// @route   Get /api/v1/orders/:orderId
+// @access  Private
+exports.getOrder = asyncHandler(async (req, res, next) => {
+  const order = await Order.findById(req.params.orderId);
+
+  // Handler order not found
+  if (!order) {
+    return next(new AppError("Order not found.", 404));
+  }
+
+  // Handler order does not belong to logged in user
+  if (order.userId.toString() !== req.user.id) {
+    return next(new AppError("User not authorized", 401));
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: { order },
   });
 });
