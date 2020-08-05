@@ -1,5 +1,6 @@
 import React, { useState, Fragment, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { login, register } from "../../actions/auth";
 import { getOrders, getOrder } from "../../actions/order";
@@ -119,12 +120,15 @@ const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
           <h3>User Logged In</h3>
           <p>{JSON.stringify(auth.user)}</p>
           <h3>User orders</h3>
-          {order.orders.map((order) => (
-            <div className="" key={order._id}>
-              <p>{JSON.stringify(order)}</p>
-              <button>VIEW ORDER</button>
-            </div>
-          ))}
+          <ul>
+            {" "}
+            {order.orders.map((order) => (
+              <li className="" key={order._id}>
+                <p>{order._id}</p>
+                <Link to={`/order/${order._id}`}>Detail</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </Fragment>
