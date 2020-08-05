@@ -52,7 +52,10 @@ exports.createOrder = asyncHandler(async (req, res, next) => {
 // @route   Get /api/v1/orders
 // @access  Private
 exports.getOrders = asyncHandler(async (req, res, next) => {
-  const orders = await Order.find({ userId: req.user.id });
+  const orders = await Order.find({ userId: req.user.id }).populate({
+    path: "productId",
+    select: "name",
+  });
   res.status(200).json({
     status: "success",
     data: { orders },

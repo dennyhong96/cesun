@@ -11,6 +11,9 @@ export const getOrders = () => async (dispatch) => {
       payload: res.data.data,
     });
   } catch (error) {
+    dispatch({
+      type: ORDER_ERROR,
+    });
     console.error(error);
   }
 };
@@ -24,6 +27,9 @@ export const getOrder = (orderId) => async (dispatch) => {
       payload: res.data.data.order,
     });
   } catch (error) {
+    dispatch({
+      type: ORDER_ERROR,
+    });
     console.error(error);
   }
 };

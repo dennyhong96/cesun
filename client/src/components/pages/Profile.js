@@ -96,7 +96,7 @@ const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
           </form>
 
           <form>
-            <h2>Register</h2>
+            <h2>Log in</h2>
             <input
               type="email"
               name="email"
