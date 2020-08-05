@@ -8,7 +8,7 @@ import "./Profile.scss";
 const Profile = ({ auth, order, login, register, getOrders, getOrder }) => {
   useEffect(() => {
     getOrders();
-  }, [auth.isAuthenticated]);
+  }, [auth.isAuthenticated, getOrders]);
 
   const [formData, setFormData] = useState({
     email: "",

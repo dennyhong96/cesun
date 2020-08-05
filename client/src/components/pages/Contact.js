@@ -28,7 +28,7 @@ const Contact = ({ auth, order, getOrders, createForm }) => {
 
   useEffect(() => {
     getOrders();
-  }, []);
+  }, [getOrders]);
 
   useEffect(() => {
     if (order.orders.length) {
