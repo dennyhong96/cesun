@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-const Orders = ({ match }) => {
+import { getOrder } from "../../actions/order";
+
+const Orders = ({ match, order, getOrder }) => {
+  useEffect(() => {
+    getOrder(match.params.id);
+  }, [match.params.id, getOrder]);
+
   return (
     <div>
       <h1>Order</h1>
-      <p>{match.params.id}</p>
+      {!!Object.keys(order.selectedOrder).length && (
+        <p>{JSON.stringify(order.selectedOrder)}</p>
+      )}
     </div>
   );
 };
 
-export default Orders;
+const mapStateToProps = ({ order }) => ({ order });
+
+export default connect(mapStateToProps, { getOrder })(Orders);

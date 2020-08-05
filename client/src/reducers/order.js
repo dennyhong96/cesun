@@ -15,7 +15,7 @@ export default (state = INITIAL_STATE, action) => {
     case ORDERS_FETCHED:
       return { ...state, ...payload };
     case ORDER_FETCHED:
-      return { ...state, selectedORder: payload };
+      return { ...state, selectedOrder: payload };
     default:
       return state;
   }
