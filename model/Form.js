@@ -15,9 +15,11 @@ const formSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
+    required: [true, "Firstname is required"],
   },
   lastName: {
     type: String,
+    required: [true, "Lastname is required"],
   },
   subject: {
     type: String,
